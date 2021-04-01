@@ -54,6 +54,9 @@ ydl_opts = {
 def download(message):
     with youtube_dl.YoutubeDL(ydl_opts) as ydl:
         bot.reply_to(message, 'downloading')
-        ydl.download([message.text])
+        try:
+            ydl.download([message.text])
+        except:
+            bot.reply_to(message, 'Unexpected error occurred')
 
 bot.polling()
