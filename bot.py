@@ -1,6 +1,9 @@
-#https://github.com/ytdl-org/youtube-dl/blob/master/README.md#embedding-youtube-dl
-#https://github.com/eternnoir/pyTelegramBotAPI/blob/master/README.md#a-simple-echo-bot
-#tgtoken="TG-BOT-TOKEN" tgchatid="TG-CHAT-ID" ytdldir="/PATH/TO/DOWNLOAD/DIR" python3 bot.py
+# https://github.com/ytdl-org/youtube-dl/blob/master/README.md#embedding-youtube-dl
+# https://github.com/eternnoir/pyTelegramBotAPI/blob/master/README.md#a-simple-echo-bot
+
+# run:
+# pip3 install pyTelegramBotAPI youtube-dl
+# tgtoken="TG-BOT-TOKEN" tgchatid="TG-CHAT-ID" ytdldir="/PATH/TO/DOWNLOAD/DIR" python3 bot.py
 
 from __future__ import unicode_literals
 import telebot
@@ -26,7 +29,6 @@ class MyLogger(object):
     def warning(self, msg):
         pass
     def error(self, msg):
-        #print(msg)
         bot.send_message(chat_id, msg)
 
 def my_hook(d):
@@ -49,11 +51,9 @@ ydl_opts = {
 }
 
 @bot.message_handler(func=lambda message: message.chat.id == chat_id)
-def echo_all(message):
+def download(message):
     with youtube_dl.YoutubeDL(ydl_opts) as ydl:
         bot.reply_to(message, 'downloading')
         ydl.download([message.text])
 
 bot.polling()
-
-
