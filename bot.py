@@ -2,6 +2,7 @@
 # https://github.com/eternnoir/pyTelegramBotAPI/blob/master/README.md#a-simple-echo-bot
 
 # run:
+# install ffmpeg pkg OR https://johnvansickle.com/ffmpeg/
 # pip3 install pyTelegramBotAPI youtube-dl
 # tgtoken="TG-BOT-TOKEN" tgchatid="TG-CHAT-ID" ytdldir="/PATH/TO/DOWNLOAD/DIR" python3 bot.py
 
@@ -21,6 +22,10 @@ for env in ["tgtoken","tgchatid","ytdldir"]:
         print(env + ' not found')
         exit()
 del env
+
+telebot.apihelper.RETRY_ON_ERROR = True
+telebot.apihelper.RETRY_TIMEOUT = 15
+telebot.apihelper.MAX_RETRIES = 20
 
 bot = telebot.TeleBot(os.getenv('tgtoken'))
 chat_id = int(os.getenv('tgchatid'))
