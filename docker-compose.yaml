@@ -1,0 +1,17 @@
+version: '2'
+
+services:
+  ytdl-tg-bot:
+    container_name: ytdl-tg-bot
+    image: cycor/ytdl-tg-bot:latest
+    restart: unless-stopped
+    user: 1000:1000
+    volumes:
+      - [settings folder]:/config
+      - [download folder]:/ytdl
+    environment: 
+      - tgtoken=[telegram_token]
+      - tgchatid=[telegam_chatid]
+      - format=bv*+ba/b
+      - ouputformat=/%(upload_date)s %(uploader)s - %(title)s [%(id)s].mp4
+
